@@ -8,7 +8,7 @@ export const CardContainer = styled.div<{ $clickable?: boolean }>`
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
-  max-width: 300px;
+  max-width: 400px;
   cursor: ${({ $clickable }) => ($clickable ? "pointer" : "default")};
 
   &:hover {

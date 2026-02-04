@@ -19,10 +19,7 @@ export interface CharacterCardProps {
   onClick?: () => void;
 }
 
-export const CharacterCard: React.FC<CharacterCardProps> = ({
-  character,
-  onClick,
-}) => {
+export const CharacterCard = ({ character, onClick }: CharacterCardProps) => {
   return (
     <CardContainer
       onClick={onClick}

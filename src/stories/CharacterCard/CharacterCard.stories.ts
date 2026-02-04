@@ -42,7 +42,7 @@ export const DeadCharacter: Story = {
   args: {
     character: {
       ...charactersMock[0],
-      status: "Dead" as const,
+      status: "Dead",
       name: "Rick Sanchez (Morto)",
     },
   },
@@ -52,7 +52,7 @@ export const UnknownStatus: Story = {
   args: {
     character: {
       ...charactersMock[0],
-      status: "unknown" as const,
+      status: "unknown",
       name: "Rick Sanchez (Desconhecido)",
     },
   },
