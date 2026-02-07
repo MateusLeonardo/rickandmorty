@@ -28,3 +28,12 @@ const CharacterStatusLabel = {
 export const getCharacterStatusLabel = (status: CharacterModel["status"]) => {
   return CharacterStatusLabel[status];
 };
+export interface CharacterResponseModel {
+  info: {
+    count: number;
+    pages: number;
+    next: string | null;
+    prev: string | null;
+  };
+  results: CharacterModel[];
+}
