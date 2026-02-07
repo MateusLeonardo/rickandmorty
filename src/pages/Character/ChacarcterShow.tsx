@@ -1,50 +1,18 @@
-import { useEffect, useState } from "react";
-import {
-  getCharacterStatusLabel,
-  type CharacterModel,
-} from "../../models/character-model";
+import { getCharacterStatusLabel } from "../../models/character-model";
 import { CharacterCard } from "../../components/ui/CharacterCard/CharacterCard";
 import { useParams } from "react-router";
+import { useGetCharacter } from "../../hooks/queries/characters/use-get-character";
 
 export function ChacarcterShow() {
   const { id } = useParams<{ id: string }>();
-  const [character, setCharacter] = useState<CharacterModel | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { data: character, isLoading } = useGetCharacter(Number(id));
 
-  useEffect(() => {
-    const fetchCharacter = async () => {
-      try {
-        const response = await fetch(
-          `https://rickandmortyapi.com/api/character/${id}`,
-        );
-        const data = await response.json();
-        setCharacter(data);
-      } catch (error) {
-        console.error("Erro ao buscar personagem:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (id) {
-      fetchCharacter();
-    }
-  }, [id]);
-
-  if (loading) {
-    return (
-      <div>
-        <p>Carregando...</p>
-      </div>
-    );
+  if (isLoading) {
+    return <div>Carregando...</div>;
   }
 
   if (!character) {
-    return (
-      <div>
-        <h1>Personagem não encontrado</h1>
-      </div>
-    );
+    return <div>Personagem não encontrado</div>;
   }
 
   return (
