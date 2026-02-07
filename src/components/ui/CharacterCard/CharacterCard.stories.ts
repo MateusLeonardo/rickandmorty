@@ -1,15 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-
+import React from "react";
 import { fn } from "storybook/test";
 
 import { CharacterCard } from "./CharacterCard";
+import { CharacterCardSkeleton } from "./CharacterCardSkeleton";
 import { charactersMock } from "../../mock/character";
+import { INITIAL_VIEWPORTS } from "storybook/viewport";
 
 const meta = {
   title: "RickAndMorty/CharacterCard",
   component: CharacterCard,
   parameters: {
     layout: "centered",
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+    },
   },
   tags: ["autodocs"],
   argTypes: {
@@ -25,6 +30,7 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+type RenderStory = StoryObj<Meta<React.ComponentType>>;
 
 export const Rick: Story = {
   args: {
@@ -56,4 +62,8 @@ export const UnknownStatus: Story = {
       name: "Rick Sanchez (Desconhecido)",
     },
   },
+};
+
+export const Skeleton: RenderStory = {
+  render: () => React.createElement(CharacterCardSkeleton),
 };
