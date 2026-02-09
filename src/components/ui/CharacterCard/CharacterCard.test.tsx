@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import "@testing-library/jest-dom/vitest";
 import { CharacterCard } from "./CharacterCard";
-import { charactersMock } from "../../mock/character";
+import { charactersMock } from "../../../mocks/characters";
 
 describe("CharacterCard", () => {
   it("Deve renderizar o card corretamente", () => {

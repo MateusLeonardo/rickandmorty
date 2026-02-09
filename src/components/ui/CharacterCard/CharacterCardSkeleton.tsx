@@ -8,7 +8,7 @@ export const CharacterCardSkeleton = () => {
       </S.ImageContainer>
       <S.ContentContainer>
         <S.SkeletonText $height="24px" $width="80%" />
-        <S.SkeletonText $height="16px" $width="60%" />
+        <S.SkeletonText $height="17px" $width="60%" />
       </S.ContentContainer>
     </S.CardContainer>
   );
