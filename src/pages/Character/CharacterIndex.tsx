@@ -1,28 +1,43 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { Pagination } from "../../components/ui/Pagination/Pagination";
+import { ContentGrid } from "../../components/ui/ContentGrid/ContentGrid";
 import { CharacterCard } from "../../components/ui/CharacterCard/CharacterCard";
 import { CharacterCardSkeleton } from "../../components/ui/CharacterCard/CharacterCardSkeleton";
-import { Link } from "react-router";
 import { useGetAllCharacters } from "../../hooks/queries/characters/use-get-all-characters";
+import HeaderPage from "../../components/ui/HeaderPage/HeaderPage";
+import { ContentGridSkeleton } from "../../components/ui/ContentGrid/ContentGridSkeleton";
 
 export function CharacterIndex() {
   const [page, setPage] = useState(1);
   const { data, isLoading } = useGetAllCharacters(page);
 
+  if (isLoading) {
+    return (
+      <ContentGridSkeleton
+        length={20}
+        renderSkeleton={() => <CharacterCardSkeleton />}
+      />
+    );
+  }
   return (
-    <div className="p-4 max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {isLoading
-          ? Array.from({ length: 10 }).map((_, index) => (
-              <CharacterCardSkeleton key={index} />
-            ))
-          : data?.results?.map((character) => (
-              <Link key={character.id} to={`/characters/${character.id}`}>
-                <CharacterCard character={character} />
-              </Link>
-            ))}
-      </div>
-
+    <>
+      <HeaderPage
+        title="Personagens"
+        subtitle="Explore os personagens da série Rick and Morty"
+      />
+      <ContentGrid
+        items={data?.results ?? []}
+        keyExtractor={(c) => c.id}
+        renderItem={(character) => (
+          <Link
+            to={`/characters/${character.id}`}
+            className="block w-full min-w-0"
+          >
+            <CharacterCard character={character} />
+          </Link>
+        )}
+      />
       {!!data?.info && (
         <Pagination
           pages={data?.info.pages}
@@ -33,6 +48,6 @@ export function CharacterIndex() {
           onNext={() => setPage((prev) => prev + 1)}
         />
       )}
-    </div>
+    </>
   );
 }
