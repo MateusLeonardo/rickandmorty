@@ -9,6 +9,9 @@ export const useGetCharacter = (id: number) => {
         `https://rickandmortyapi.com/api/character/${id}`,
       );
       const data = await response.json();
+      if (!response.ok) {
+        throw new Error("Failed to fetch character");
+      }
       return data as CharacterModel;
     },
     staleTime: 1000 * 60 * 5,
