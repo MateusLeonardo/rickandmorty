@@ -5,10 +5,10 @@ export const Header = styled.header`
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-  z-index: 1003; /* Header sempre acima de tudo */
+  z-index: 1003;
 
   @media (max-width: 768px) {
-    z-index: 1003; /* Mantém header acima do overlay */
+    z-index: 1003;
   }
 `;
 
@@ -19,7 +19,7 @@ export const HeaderContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   position: relative;
-  z-index: 1003; /* Container sempre acima do menu mobile */
+  z-index: 1003;
 `;
 
 export const LogoContainer = styled.div`

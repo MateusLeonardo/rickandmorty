@@ -1,15 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Header } from "./Header";
-import { INITIAL_VIEWPORTS } from "storybook/viewport";
+import { Header } from "./Header.tsx";
 
 const meta: Meta<typeof Header> = {
-  title: "RickAndMorty/Header",
+  title: "Layout/Header",
   component: Header,
   parameters: {
     layout: "fullscreen",
-    viewport: {
-      viewports: INITIAL_VIEWPORTS,
-    },
   },
   tags: ["autodocs"],
 };
