@@ -1,13 +1,13 @@
 import { useState } from "react";
 import * as S from "./Header.styles.ts";
-import logo from "@/assets/logo-black.png";
+import logo from "/logo-black.png";
 import { Link } from "react-router";
 
 const navItems = [
   { to: "/", label: "Home" },
-  { to: "/characters", label: "Personagens" },
-  { to: "/episodes", label: "Episódios" },
-  { to: "/locations", label: "Locais" },
+  { to: "/characters", label: "Characters" },
+  { to: "/episodes", label: "Episodes" },
+  { to: "/locations", label: "Locations" },
 ];
 
 export const Header = () => {
