@@ -1,5 +1,5 @@
-import { ButtonWithProps } from "../ButtonWithProps/ButtonWithProps";
-import { PaginationContainer } from "./Styles";
+import { Button } from "@/components/ui/Button/index.ts";
+import * as S from "./Pagination.styles.ts";
 
 interface PaginationProps {
   pages: number;
@@ -9,25 +9,26 @@ interface PaginationProps {
   onPrevious: () => void;
   onNext: () => void;
 }
-export const Pagination = ({
+
+export function Pagination({
   pages,
   next,
   prev,
   page,
   onPrevious,
   onNext,
-}: PaginationProps) => {
+}: PaginationProps) {
   return (
-    <PaginationContainer>
-      <ButtonWithProps disabled={!prev} onClick={onPrevious}>
+    <S.PaginationContainer>
+      <Button disabled={!prev} onClick={onPrevious}>
         Anterior
-      </ButtonWithProps>
+      </Button>
       <p className="pagination-info">
         Página <span>{page}</span> de {pages}
       </p>
-      <ButtonWithProps disabled={!next} onClick={onNext}>
+      <Button disabled={!next} onClick={onNext}>
         Próximo
-      </ButtonWithProps>
-    </PaginationContainer>
+      </Button>
+    </S.PaginationContainer>
   );
-};
+}
