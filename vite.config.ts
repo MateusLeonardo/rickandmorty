@@ -13,6 +13,11 @@ const dirname =
 
 export default defineConfig({
   plugins: [tailwindcss(), react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(dirname, "src"),
+    },
+  },
   test: {
     globals: true,
     environment: "jsdom",
@@ -23,7 +28,13 @@ export default defineConfig({
     projects: [
       {
         root: dirname,
+        resolve: {
+          alias: {
+            "@": path.resolve(dirname, "src"),
+          },
+        },
         test: {
+          name: "storybook",
           browser: {
             enabled: true,
             headless: true,
