@@ -25,6 +25,7 @@ export const CharactersService = {
   getByIds: async (ids: (string | number)[]): Promise<Character[]> => {
     const response = await fetch(`${API_URL}/character/${ids.join(",")}`);
     if (!response.ok) throw new Error("Failed to fetch characters");
-    return response.json();
+    const data = await response.json();
+    return Array.isArray(data) ? data : [data];
   },
 };
