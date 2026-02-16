@@ -1,9 +1,15 @@
 import { Route, Routes } from "react-router";
 import { RootLayout } from "@/components/layout/RootLayout/index.ts";
 import { HomePage } from "@/features/home/index.ts";
-import { CharactersPage, CharacterDetailPage } from "@/features/characters/index.ts";
+import {
+  CharactersPage,
+  CharacterDetailPage,
+} from "@/features/characters/index.ts";
 import { EpisodesPage, EpisodeDetailPage } from "@/features/episodes/index.ts";
-import { LocationsPage } from "@/features/locations/index.ts";
+import {
+  LocationDetailPage,
+  LocationsPage,
+} from "@/features/locations/index.ts";
 
 export function AppRoutes() {
   return (
@@ -18,7 +24,10 @@ export function AppRoutes() {
           <Route index element={<EpisodesPage />} />
           <Route path=":id" element={<EpisodeDetailPage />} />
         </Route>
-        <Route path="locations" element={<LocationsPage />} />
+        <Route path="locations">
+          <Route index element={<LocationsPage />} />
+          <Route path=":id" element={<LocationDetailPage />} />
+        </Route>
       </Route>
     </Routes>
   );
