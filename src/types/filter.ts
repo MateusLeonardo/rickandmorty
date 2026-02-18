@@ -3,3 +3,8 @@ export interface CharacterFilter {
   gender: string;
   name: string;
 }
+export interface LocationFilter {
+  name: string;
+  type: string;
+  dimension: string;
+}
