@@ -8,3 +8,8 @@ export interface LocationFilter {
   type: string;
   dimension: string;
 }
+
+export interface EpisodeFilter {
+  name: string;
+  episode: string;
+}
