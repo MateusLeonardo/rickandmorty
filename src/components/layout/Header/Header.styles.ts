@@ -73,7 +73,6 @@ export const MobileMenuButton = styled.button<{ $isOpen: boolean }>`
   border-radius: 4px;
   cursor: pointer;
   padding: 4px;
-  position: fixed;
   top: 16px;
   right: 16px;
   z-index: 1002;
@@ -117,7 +116,9 @@ export const MobileMenu = styled.div<{ $isOpen: boolean }>`
   z-index: 1000;
   opacity: ${({ $isOpen }) => ($isOpen ? "1" : "0")};
   visibility: ${({ $isOpen }) => ($isOpen ? "visible" : "hidden")};
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 
   @media (max-width: 768px) {
     display: block;
