@@ -1,10 +1,5 @@
 import { useParams, Link } from "react-router";
 import { useCharacter } from "../hooks/useCharacter.ts";
-import {
-  genderLabel,
-  getCharacterStatusLabel,
-  statusBadgeClass,
-} from "@/types/character.ts";
 import { ErrorState } from "@/components/feedback/ErrorState/index.ts";
 import { FaArrowLeft } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
@@ -37,21 +32,7 @@ function CharacterDetailSkeleton() {
 export function CharacterDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { data: character, isLoading, isError } = useCharacter(Number(id));
-
   const locationId = character?.location.url.split("/").pop();
-
-  if (isLoading) return <CharacterDetailSkeleton />;
-
-  if (isError || !character) {
-    return (
-      <ErrorState
-        title="Personagem não encontrado"
-        message="O personagem que você está procurando não existe."
-        backTo="/characters"
-        backLabel="Voltar aos personagens"
-      />
-    );
-  }
 
   return (
     <div className="container mx-auto p-4">
@@ -63,57 +44,68 @@ export function CharacterDetailPage() {
         Go back
       </Link>
 
-      <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-10 mb-4">
-        <figure>
-          <img
-            src={character.image}
-            alt={character.name}
-            className="object-cover rounded-full"
-          />
-        </figure>
-        <div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl text-center text-black">
-            {character.name}
-          </h1>
-          <div className="flex flex-col gap-2">
-            <h2 className="text-gray-500 font-medium mb-4">Informations</h2>
-            <div className="flex flex-col items-start gap-2">
-              <span className="text-black font-medium">Gender</span>
-              <span className="text-gray-500">{character.gender}</span>
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <span className="text-black font-medium">Status</span>
-              <span className="text-gray-500">{character.status}</span>
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <span className="text-black font-medium">Specie</span>
-              <span className="text-gray-500">{character.species}</span>
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <span className="text-black font-medium">Origin</span>
-              <span className="text-gray-500">{character.origin.name}</span>
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <span className="text-black font-medium">Type</span>
-              <span className="text-gray-500">
-                {character.type || "Unknown"}
-              </span>
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <span className="text-black font-medium">Location</span>
-              <span className="text-gray-500">
-                <Link
-                  to={`/locations/${locationId}`}
-                  className="text-gray-500 flex items-center gap-2"
-                >
-                  {character.location.name}
-                  <IoIosArrowForward />
-                </Link>
-              </span>
+      {isError ? (
+        <ErrorState
+          title="Character not found"
+          message="The character you are looking for does not exist."
+        />
+      ) : isLoading ? (
+        <CharacterDetailSkeleton />
+      ) : (
+        character && (
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-10 mb-4">
+            <figure>
+              <img
+                src={character.image}
+                alt={character.name}
+                className="object-cover rounded-full"
+              />
+            </figure>
+            <div>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl text-center text-black">
+                {character.name}
+              </h1>
+              <div className="flex flex-col gap-2">
+                <h2 className="text-gray-500 font-medium mb-4">Informations</h2>
+                <div className="flex flex-col items-start gap-2">
+                  <span className="text-black font-medium">Gender</span>
+                  <span className="text-gray-500">{character.gender}</span>
+                </div>
+                <div className="flex flex-col items-start gap-2">
+                  <span className="text-black font-medium">Status</span>
+                  <span className="text-gray-500">{character.status}</span>
+                </div>
+                <div className="flex flex-col items-start gap-2">
+                  <span className="text-black font-medium">Specie</span>
+                  <span className="text-gray-500">{character.species}</span>
+                </div>
+                <div className="flex flex-col items-start gap-2">
+                  <span className="text-black font-medium">Origin</span>
+                  <span className="text-gray-500">{character.origin.name}</span>
+                </div>
+                <div className="flex flex-col items-start gap-2">
+                  <span className="text-black font-medium">Type</span>
+                  <span className="text-gray-500">
+                    {character.type || "Unknown"}
+                  </span>
+                </div>
+                <div className="flex flex-col items-start gap-2">
+                  <span className="text-black font-medium">Location</span>
+                  <span className="text-gray-500">
+                    <Link
+                      to={`/locations/${locationId}`}
+                      className="text-gray-500 flex items-center gap-2"
+                    >
+                      {character.location.name}
+                      <IoIosArrowForward />
+                    </Link>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        )
+      )}
     </div>
   );
 }
